@@ -15,8 +15,9 @@ public class CustomerService {
 	@Autowired
 	CustomerRepo customerRepo;
 
-	public void createCustomer(List<Customer> cust) {
-		customerRepo.saveAll(cust);
+	public Customer createCustomer(Customer cust) {
+		customerRepo.save(cust);
+		return cust;
 
 	}
 
@@ -27,6 +28,15 @@ public class CustomerService {
 	public Optional<Customer> getCustomer(int id) {
 		return Optional.of(customerRepo.findById(id));
 
+	}
+	
+	public Customer update(int id, Customer cust) {
+		customerRepo.save(cust);
+		return cust;
+		}
+	
+	public void delete(int id) {
+		customerRepo.deleteById(id);
 	}
 
 }
