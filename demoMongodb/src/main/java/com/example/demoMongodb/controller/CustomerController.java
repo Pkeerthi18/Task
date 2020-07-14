@@ -17,7 +17,7 @@ import com.example.demoMongodb.model.Customer;
 import com.example.demoMongodb.service.CustomerService;
 
 @RestController
-@RequestMapping(path = "/mongodb")
+@RequestMapping(path = "/customers")
 public class CustomerController {
 
 	@Autowired
@@ -31,7 +31,7 @@ public class CustomerController {
 
 	}
 
-	@GetMapping(path = "/getall")
+	@GetMapping(path = "/")
 	public List<Customer> getAll() {
 
 		return customerService.getAllCustomers();
@@ -41,19 +41,20 @@ public class CustomerController {
 	public Optional<Customer> getById(@PathVariable int id) {
 
 		return customerService.getCustomer(id);
+
 	}
-	
+
 	@PutMapping("/update/{id}")
-	public void update(@RequestBody Customer user, @PathVariable Integer id) {
+	public String update(@PathVariable Integer id, @RequestBody Customer user) {
 		customerService.update(id, user);
+		return "Customer is updated successsfully";
 
 	}
-	
+
 	@DeleteMapping("/delete/{id}")
-	public void delete(@PathVariable int id) {
+	public String delete(@PathVariable int id) {
 		customerService.delete(id);
+		return "Customer deleted successfully";
 	}
-
-
 
 }
